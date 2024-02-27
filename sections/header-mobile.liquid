@@ -128,9 +128,9 @@
                                     <input 
                                         type="text" 
                                         placeholder="Search for products, brands and more" 
-                                        style="font-size: 12px; border-radius: 20px; padding-right: 16px; padding-left: 30px; width: 270px; height: 36px; border-color: #ddd; border-style: solid;" 
+                                        style="font-size: {{ block.settings.search_font_size }}px; border-radius: {{ block.settings.search_border_radius }}px; padding-right: {{ block.settings.search_padding_right }}px; padding-left: {{ block.settings.search_padding_left }}px; width: {{ block.settings.search_width }}px; height: {{ block.settings.search_height }}px; border-color: {{ block.settings.search_border_color }}; border-style: solid;" 
                                     />
-                                    <div style="position: absolute; left: 15px; top: 6px;">
+                                    <div style="position: absolute; left: {{ block.settings.search_icon_left }}px; top: {{ block.settings.search_icon_top }}px;">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                         </svg>
@@ -456,6 +456,84 @@
                     "id": "color",
                     "label": "t:sections.header.settings.header_top.label__4",
                     "default": "#232323"
+                },
+                {
+                    "type": "range",
+                    "id": "search_font_size",
+                    "label": "t:sections.header.settings.header_top.search_font_size",
+                    "default": 12,
+                    "min": 10,
+                    "max": 24,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_border_radius",
+                    "label": "t:sections.header.settings.header_top.search_border_radius",
+                    "default": 20,
+                    "min": 1,
+                    "max": 50,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_padding_right",
+                    "label": "t:sections.header.settings.header_top.search_padding_right",
+                    "default": 16,
+                    "min": 5,
+                    "max": 32,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_padding_left",
+                    "label": "t:sections.header.settings.header_top.search_padding_left",
+                    "default": 30,
+                    "min": 10,
+                    "max": 50,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_width",
+                    "label": "t:sections.header.settings.header_top.search_width",
+                    "default": 270,
+                    "min": 250,
+                    "max": 350,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_height",
+                    "label": "t:sections.header.settings.header_top.search_height",
+                    "default": 36,
+                    "min": 10,
+                    "max": 70,
+                    "step": 1
+                },
+                {
+                    "type": "color",
+                    "id": "search_border_color",
+                    "label": "t:sections.header.settings.header_top.search_border_color",
+                    "default": "#ddd"
+                },
+                {
+                    "type": "range",
+                    "id": "search_icon_left",
+                    "label": "t:sections.header.settings.header_top.search_icon_left",
+                    "default": 15,
+                    "min": 5,
+                    "max": 30,
+                    "step": 1
+                },
+                {
+                    "type": "range",
+                    "id": "search_icon_top",
+                    "label": "t:sections.header.settings.header_top.search_icon_top",
+                    "default": 6,
+                    "min": 1,
+                    "max": 30,
+                    "step": 1
                 }
             ]
         },
