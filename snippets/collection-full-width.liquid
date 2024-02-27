@@ -160,6 +160,7 @@
                 {%- endfor -%}
                 {%- paginate collection.products by products_per_page -%}
                     {%- if show_toolbar -%}
+                        
                         {% render 'toolbar',
                             has_sidebar: has_sidebar,
                             show_sorting: show_sorting,
@@ -170,6 +171,7 @@
                             sort_by: sort_by,
                             sort_options: sort_options
                         %}
+                        
                     {%- endif -%}
                     {%- if collection.products.size == 0 -%}
                         <div class="collection collection--empty{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" id="main-collection-product-grid" data-id="{{ section.id }}">

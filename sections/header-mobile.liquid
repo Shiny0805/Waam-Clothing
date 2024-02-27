@@ -111,10 +111,10 @@
             {%- for block in section.blocks -%}
                 <div class="header-mobile__item header-mobile__item--{{ block.type }}" >
                     {%- case block.type -%}
-                        {% comment %} {%-  when 'menu' -%}
+                        {%-  when 'menu' -%}
                             <div class="header-mobile--icon item__mobile--hamburger" style="--i-color: {{ block.settings.color }}">
                                 <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu"><span class="mobileMenu-toggle__Icon"></span></button>
-                            </div> {% endcomment %}
+                            </div>
                         {%-  when 'search' -%}
                             {% comment %} <details-modal class="header__iconItem header__search" style="--i-color: {{ block.settings.color }}">
                                 <details>
