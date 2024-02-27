@@ -112,7 +112,7 @@
                 <div class="header-mobile__item header-mobile__item--{{ block.type }}" >
                     {%- case block.type -%}
                         {%-  when 'menu' -%}
-                            <div class="header-mobile--icon item__mobile--hamburger" style="--i-color: {{ block.settings.color }}">
+                            <div class="header-mobile--icon item__mobile--hamburger" style="--i-color: {{ block.settings.color }}; margin-right: {{ block.settings.mobile_menu_icon }}px;">
                                 <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu"><span class="mobileMenu-toggle__Icon"></span></button>
                             </div>
                         {%-  when 'search' -%}
@@ -124,7 +124,7 @@
                                 </details>
                             </details-modal> {% endcomment %}
                             <details-modal class="header__iconItem header__search" style="--i-color: {{ block.settings.color }}">
-                                <div style="position: relative; margin-bottom: {{ block.settings.search_margin_bottom }}px;" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}" data-search-mobile>
+                                <div style="position: relative; margin-top: {{ block.settings.search_margin_bottom }}px;" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}" data-search-mobile>
                                     <input 
                                         type="text" 
                                         placeholder="Search for products, brands and more" 
@@ -443,6 +443,15 @@
                     "id": "color",
                     "label": "t:sections.header.settings.header_top.label__4",
                     "default": "#232323"
+                },
+                {
+                    "type": "range",
+                    "id": "mobile_menu_icon",
+                    "label": "t:sections.header.settings.header_top.mobile_menu_icon",
+                    "default": 10,
+                    "min": 1,
+                    "max": 30,
+                    "step": 1
                 }
             ]
         },
@@ -539,7 +548,7 @@
                     "type": "range",
                     "id": "search_margin_bottom",
                     "label": "t:sections.header.settings.header_top.search_margin_bottom",
-                    "default": 10,
+                    "default": 5,
                     "min": 1,
                     "max": 30,
                     "step": 1

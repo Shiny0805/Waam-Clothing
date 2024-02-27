@@ -1,15 +1,14 @@
 <style>
   /* Style the tab */
-.tab {
+.product_tab {
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
-  {% comment %} height: 300px; {% endcomment %}
 }
 
 /* Style the buttons that are used to open the tab content */
-.tab button {
+.product_tab button {
   display: block;
   background-color: inherit;
   color: black;
@@ -23,17 +22,17 @@
 }
 
 /* Change background color of buttons on hover */
-.tab button:hover {
+.product_tab button:hover {
   background-color: #ddd;
 }
 
 /* Create an active/current "tab button" class */
-.tab button.active {
+.product_tab button.active {
   background-color: #ccc;
 }
 
 /* Style the tab content */
-.tabcontent {
+.product_tabcontent {
   float: left;
   padding: 0px 12px;
   border: 1px solid #ccc;
@@ -42,8 +41,8 @@
   {% comment %} height: 300px; {% endcomment %}
 }
 
-/* Style the buttons that are used to open and close the accordion panel */
-.accordion {
+/* Style the buttons that are used to open and close the clothing_accordion panel */
+.clothing_accordion, .accessories_accordion {
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -56,12 +55,12 @@
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
+.active, .clothing_accordion:hover, .accessories_accordion:hover {
   background-color: #ccc;
 }
 
-/* Style the accordion panel. Note: hidden by default */
-.panel {
+/* Style the clothing_accordion panel. Note: hidden by default */
+.clothing_panel, .accessories_panel {
   padding: 0 18px;
   background-color: white;
   display: none;
@@ -69,7 +68,7 @@
   transition: max-height 0.2s ease-out;
 }
 
-.accordion:after {
+.clothing_accordion:after, .accessories_accordion:after {
   content: '\02795'; /* Unicode character for "plus" sign (+) */
   font-size: 13px;
   color: #777;
@@ -77,7 +76,7 @@
   margin-left: 5px;
 }
 
-.active:after {
+.clothing_accordion.active:after, .accessories_accordion.active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
@@ -89,13 +88,52 @@
         <div class="site-nav-mobile nav-menu-tab"></div>
         <div class="site-nav-mobile nav" data-navigation-mobile>
           <div class="menu-heading-mobile halo-sidebar-header">
+            <div style="position: relative; display: flex; justify-content: center">
+              <input 
+                  type="text" 
+                  placeholder="Search for products, brands and more" 
+                  style="font-size: 12px; border-radius: 20px; padding-right: 16px; padding-left: 30px; width: 270px; height: 36px; border-color: #ddd; border-style: solid;" 
+              />
+              <div style="position: absolute; left: 15px; top: 6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                  </svg>
+              </div>
+            </div>
             <span class="title">{{ 'general.common.menu' | t }}</span>
-            <button type="button" class="halo-sidebar-close" data-menu-close-sidebar aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}{{ 'general.common.close' | t }}</a>
+            <button 
+              type="button" 
+              class="halo-sidebar-close" 
+              data-menu-close-sidebar 
+              aria-label="{{ 'general.common.close' | t }}">
+                <a>
+                  {% render 'icon-close' %}{{ 'general.common.close' | t }}
+                </a>
+            </button>
           </div>
         </div>
       {%- else -%}
         <div class="site-nav-mobile nav-menu-tab nav-mobile-menu-tab" data-navigation-tab-mobile></div>
-          <button type="button" class="halo-sidebar-close halo-sidebar-close-custom" data-menu-close-sidebar aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}{{ 'general.common.close' | t }}</button>
+          <div style="position: relative; display: flex; justify-content: center">
+            <input 
+                type="text" 
+                placeholder="Search for products, brands and more" 
+                style="font-size: 12px; border-radius: 20px; padding-right: 16px; padding-left: 30px; width: 270px; height: 36px; border-color: #ddd; border-style: solid;" 
+            />
+            <div style="position: absolute; top: 6px; left: 15px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </div>
+          </div>
+
+          <button 
+            type="button" 
+            class="halo-sidebar-close halo-sidebar-close-custom" 
+            data-menu-close-sidebar 
+            aria-label="{{ 'general.common.close' | t }}">
+              {% render 'icon-close' %}{{ 'general.common.close' | t }}
+          </button>
         <div class="site-nav-mobile nav menu-custom-mobile" data-navigation-mobile></div>
       {%- endif -%}
       
@@ -120,43 +158,57 @@
           {%- endif -%}
           <div class="wrapper-links"></div> {% endcomment %}
 
-          <div class="tab">
-            <button class="tablinks" onclick="openType(event, 'Clothing')">Clothing</button>
-            <button class="tablinks" onclick="openType(event, 'Footwear')">Footwear</button>
-            <button class="tablinks" onclick="openType(event, 'Accessories')">Accessories</button>
+          
+
+          <div class="product_tab">
+            <button class="product_tablinks" onclick="openType(event, 'Clothing')">Clothing</button>
+            <button class="product_tablinks" onclick="openType(event, 'Footwear')">Footwear</button>
+            <button class="product_tablinks" onclick="openType(event, 'Accessories')">Accessories</button>
           </div>
 
-          <div id="Clothing" class="tabcontent">
-            <button class="accordion">Eastern</button>
-            <div class="panel">
-              <p>Lorem ipsum...</p>
+          <div id="Clothing" class="product_tabcontent">
+            <button class="clothing_accordion">Eastern</button>
+            <div class="clothing_panel">
+              <p>Eastern Products</p>
             </div>
 
-            <button class="accordion">Fusion</button>
-            <div class="panel">
-              <p>Lorem ipsum...</p>
+            <button class="clothing_accordion">Fusion</button>
+            <div class="clothing_panel">
+              <p>Fusion Products</p>
             </div>
 
-            <button class="accordion">Western</button>
-            <div class="panel">
-              <p>Lorem ipsum...</p>
+            <button class="clothing_accordion">Western</button>
+            <div class="clothing_panel">
+              <p>Western Products</p>
             </div>
 
-            <button class="accordion">Activewear</button>
-            <div class="panel">
-              <p>Lorem ipsum...</p>
+            <button class="clothing_accordion">Activewear</button>
+            <div class="clothing_panel">
+              <p>Activewear Products</p>
             </div>
 
           </div>
           
-          <div id="Footwear" class="tabcontent">
+          <div id="Footwear" class="product_tabcontent">
             <h3>Footwear</h3>
             <p>Footwear Tab.</p>
           </div>
           
-          <div id="Accessories" class="tabcontent">
-            <h3>Accessories</h3>
-            <p>Accessories Tab.</p>
+          <div id="Accessories" class="product_tabcontent">
+            <button class="accessories_accordion">Bag</button>
+            <div class="accessories_panel">
+              <p>Bag Products</p>
+            </div>
+
+            <button class="accessories_accordion">Jewelry</button>
+            <div class="accessories_panel">
+              <p>Jewelry Products</p>
+            </div>
+
+            <button class="accessories_accordion">Hair Accessories</button>
+            <div class="accessories_panel">
+              <p>Hair Accessories Products</p>
+            </div>
           </div>
 
         </div>
@@ -170,37 +222,59 @@
   document.getElementById("Accessories").style.display = "none";
 
   function openType(evt, productType) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
+    var i, product_tabcontent, product_tablinks;
   
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+    // Get all elements with class="product_tabcontent" and hide them
+    product_tabcontent = document.getElementsByClassName("product_tabcontent");
+    for (i = 0; i < product_tabcontent.length; i++) {
+      product_tabcontent[i].style.display = "none";
     }
   
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    // Get all elements with class="product_tablinks" and remove the class "active"
+    product_tablinks = document.getElementsByClassName("product_tablinks");
+    for (i = 0; i < product_tablinks.length; i++) {
+      product_tablinks[i].className = product_tablinks[i].className.replace(" active", "");
     }
   
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(productType).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+  };
 
-  var acc = document.getElementsByClassName("accordion");
+  var acc = document.getElementsByClassName("clothing_accordion");
   var i;
 
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
       this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
+
+      /* Toggle between hiding and showing the active panel */
+      var clothing_panel = this.nextElementSibling;
+      if (clothing_panel.style.display === "block") {
+        clothing_panel.style.display = "none";
       } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
+        clothing_panel.style.display = "block";
+      }
+    });
+  }
+
+  var acce = document.getElementsByClassName("accessories_accordion");
+  var j;
+
+  for (j = 0; j < acce.length; j++) {
+    acce[j].addEventListener("click", function() {
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
+      this.classList.toggle("active");
+
+      /* Toggle between hiding and showing the active panel */
+      var accessories_panel = this.nextElementSibling;
+      if (accessories_panel.style.display === "block") {
+        accessories_panel.style.display = "none";
+      } else {
+        accessories_panel.style.display = "block";
       }
     });
   }
